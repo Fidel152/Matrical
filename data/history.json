@@ -1,0 +1,1416 @@
+[
+  {
+    "id": 1789030114847,
+    "date": "10/09/2026 - 08:48",
+    "timestamp": "10/09/2026 08:48:34",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        1.0,
+        2.0
+      ],
+      [
+        3.0,
+        4.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          1.0,
+          2.0
+        ],
+        [
+          3.0,
+          4.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        -2.0,
+        1.0
+      ],
+      [
+        1.5,
+        -0.5
+      ]
+    ],
+    "steps": [
+      "Nous allons calculer l'inverse de la matrice A à l'aide de la méthode de Gauss-Jordan.",
+      "",
+      "Une matrice inverse A⁻¹ est une matrice qui, lorsqu'elle est multipliée par A, donne la matrice identité.",
+      "Nous allons donc transformer progressivement la matrice A en matrice identité.",
+      "",
+      "Matrice A :",
+      "[ 1  2 ]\n[ 3  4 ]",
+      "",
+      "La matrice identité de taille 2×2 est :",
+      "I_2 =",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous plaçons A et I_2 côte à côte. Cela permet de suivre simultanément la transformation de A et les opérations qui permettront d'obtenir son inverse.",
+      "",
+      "[ 1  2  |  1  0 ]\n[ 3  4  |  0  1 ]",
+      "",
+      "À gauche se trouve la matrice A.",
+      "À droite se trouve la matrice identité I_2.",
+      "",
+      "Notre objectif est de transformer la partie gauche en :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Lorsque cela sera fait, la partie droite sera la matrice inverse A⁻¹.",
+      "",
+      "DÉPART",
+      "[ A | I_2 ]",
+      "↓",
+      "OBJECTIF",
+      "[ I_2 | A⁻¹ ]",
+      "",
+      "┌─────────────────────────────────────────────┐\n│ ÉTAPE 1                                     │\n│ Annuler le nombre sous le pivot (colonne 1) │\n└─────────────────────────────────────────────┘\n\nPourquoi ?\nNous voulons maintenant obtenir 0 sous le premier pivot en ligne L_2, colonne C_1.\n\nOpération :\nL_2 ← L_2 - 3L_1\n\nNous multiplions d'abord la première ligne par 3.\n\n3L_1 :\n\n[3  6 | 3  0]\n\nPuis nous soustrayons cette ligne de L_2 :\n\n[3  4 | 0  1]\n-\n[3  6 | 3  0]\n\nCalcul :\n\nPremière valeur :\n\n3 - 3 = 0\n\nDeuxième valeur :\n\n4 - 6 = -2\n\nTroisième valeur :\n\n0 - 3 = -3\n\nQuatrième valeur :\n\n1 - 0 = 1\n\nDonc :\n\nL_2 = [0  -2 | -3  1]\n\nNouvelle matrice :\n\n[ 1   2  |   1  0 ]\n[ 0  -2  |  -3  1 ]\n\nCe que cela signifie :\nLe premier élément de la deuxième ligne est maintenant 0. La première colonne a donc la forme souhaitée.",
+      "",
+      "┌─────────────────────────────────────┐\n│ ÉTAPE 2                             │\n│ Normaliser le pivot de la ligne L_2 │\n└─────────────────────────────────────┘\n\nPourquoi ?\nLe deuxième pivot vaut actuellement -2. Pour obtenir la matrice identité, ce pivot doit être égal à 1.\n\nOpération :\nL_2 ← -1/2 L_2\n\nCalcul :\n-1/2 × [0  -2 | -3  1]\n\n=\n\n[0  1 | 3/2  -1/2]\n\nAvant :\n[ 1   2  |   1  0 ]\n[ 0  -2  |  -3  1 ]\n\nAprès :\n[ 1  2  |    1     0 ]\n[ 0  1  |  3/2  -1/2 ]\n\nCe que cela signifie :\nLe pivot en ligne L_2 est maintenant exactement égal à 1.\n\nUn pivot est le nombre que nous utilisons comme point de référence pour transformer les autres nombres de sa colonne.",
+      "",
+      "Ce que cela signifie :\nLe coefficient de la ligne L_1 en colonne C_2 est maintenant 0. La colonne a la forme souhaitée.",
+      "",
+      "==================================================",
+      "RÉSULTAT",
+      "==================================================",
+      "[ 1  0  |   -2     1 ]\n[ 0  1  |  3/2  -1/2 ]",
+      "",
+      "Nous avons transformé :",
+      "",
+      "[A | I_2]",
+      "",
+      "en :",
+      "",
+      "[I_2 | A⁻¹]",
+      "",
+      "La partie droite contient donc l'inverse de A.",
+      "",
+      "A⁻¹ =",
+      "[  -2     1 ]\n[ 3/2  -1/2 ]",
+      "",
+      "==================================================",
+      "VÉRIFICATION : A × A⁻¹",
+      "==================================================",
+      "Pour vérifier que cette matrice est bien l'inverse de A, nous multiplions A par A⁻¹.",
+      "",
+      "Élément (1, 1) :\n(1 × -2) + (2 × 3/2) = 1\n\nÉlément (1, 2) :\n(1 × 1) + (2 × -1/2) = 0\n\nÉlément (2, 1) :\n(3 × -2) + (4 × 3/2) = 0\n\nÉlément (2, 2) :\n(3 × 1) + (4 × -1/2) = 1",
+      "",
+      "Le résultat doit être la matrice identité :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous obtenons la matrice identité. Le calcul est donc correct.",
+      "",
+      "--------------------------------------------------",
+      "Pourquoi utilise-t-on la matrice identité ?",
+      "--------------------------------------------------",
+      "La matrice identité joue pour les matrices un rôle similaire au nombre 1 pour les nombres.",
+      "",
+      "5 × 1 = 5",
+      "",
+      "De la même façon :",
+      "",
+      "A × I_2 = A",
+      "",
+      "Elle sert ici de point de départ pour construire l'inverse avec la méthode de Gauss-Jordan."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029577007,
+    "date": "10/09/2026 - 08:39",
+    "timestamp": "10/09/2026 08:39:37",
+    "operation": "Matrice Identité I_3",
+    "action_type": "identity",
+    "formula": "I_3",
+    "dimensions": "Dimension 3×3",
+    "result_summary": "Résultat : 3×3",
+    "matrix_a": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 3,
+      "A": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Matrice Identité I_3 (taille 3×3) :",
+      "",
+      "• Qu'est-ce que c'est ?",
+      "  C'est une matrice carrée 3×3 avec des 1 sur la diagonale principale et des 0 partout ailleurs.",
+      "",
+      "• À quoi sert-elle ?",
+      "  Elle joue pour les matrices exactement le même rôle que le chiffre 1 pour les nombres usuels :",
+      "  5 × 1 = 5",
+      "  De la même façon, pour toute matrice A de taille 3×3 :",
+      "  A × I_3 = A",
+      "",
+      "• Comment est-elle utilisée dans l'inversion de matrice (Gauss-Jordan) ?",
+      "  Elle sert de matrice de référence et d'objectif final :",
+      "  On place [A | I_3] côte à côte au départ, puis on transforme la partie gauche en I_3.",
+      "  Dès que la partie gauche devient la matrice identité, la partie droite devient l'inverse A⁻¹."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029577004,
+    "date": "10/09/2026 - 08:39",
+    "timestamp": "10/09/2026 08:39:37",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 3×3",
+    "result_summary": "Résultat : 3×3",
+    "matrix_a": [
+      [
+        1.0,
+        2.0,
+        3.0
+      ],
+      [
+        0.0,
+        1.0,
+        4.0
+      ],
+      [
+        5.0,
+        6.0,
+        0.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          1.0,
+          2.0,
+          3.0
+        ],
+        [
+          0.0,
+          1.0,
+          4.0
+        ],
+        [
+          5.0,
+          6.0,
+          0.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        -24.0,
+        18.0,
+        5.0
+      ],
+      [
+        20.0,
+        -15.0,
+        -4.0
+      ],
+      [
+        -5.0,
+        4.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Nous allons calculer l'inverse de la matrice A à l'aide de la méthode de Gauss-Jordan.",
+      "",
+      "Une matrice inverse A⁻¹ est une matrice qui, lorsqu'elle est multipliée par A, donne la matrice identité.",
+      "Nous allons donc transformer progressivement la matrice A en matrice identité.",
+      "",
+      "Matrice A :",
+      "[ 1  2  3 ]\n[ 0  1  4 ]\n[ 5  6  0 ]",
+      "",
+      "La matrice identité de taille 3×3 est :",
+      "I_3 =",
+      "[ 1  0  0 ]\n[ 0  1  0 ]\n[ 0  0  1 ]",
+      "",
+      "Nous plaçons A et I_3 côte à côte. Cela permet de suivre simultanément la transformation de A et les opérations qui permettront d'obtenir son inverse.",
+      "",
+      "[ 1  2  3  |  1  0  0 ]\n[ 0  1  4  |  0  1  0 ]\n[ 5  6  0  |  0  0  1 ]",
+      "",
+      "À gauche se trouve la matrice A.",
+      "À droite se trouve la matrice identité I_3.",
+      "",
+      "Notre objectif est de transformer la partie gauche en :",
+      "[ 1  0  0 ]\n[ 0  1  0 ]\n[ 0  0  1 ]",
+      "",
+      "Lorsque cela sera fait, la partie droite sera la matrice inverse A⁻¹.",
+      "",
+      "DÉPART",
+      "[ A | I_3 ]",
+      "↓",
+      "OBJECTIF",
+      "[ I_3 | A⁻¹ ]",
+      "",
+      "Ce que cela signifie :\nLe coefficient de la ligne L_3 en colonne C_1 est maintenant 0. La colonne a la forme souhaitée.",
+      "",
+      "Ce que cela signifie :\nLe coefficient de la ligne L_1 en colonne C_2 est maintenant 0. La colonne a la forme souhaitée.",
+      "",
+      "Ce que cela signifie :\nLe coefficient de la ligne L_3 en colonne C_2 est maintenant 0. La colonne a la forme souhaitée.",
+      "",
+      "Ce que cela signifie :\nLe coefficient de la ligne L_1 en colonne C_3 est maintenant 0. La colonne a la forme souhaitée.",
+      "",
+      "Ce que cela signifie :\nLe coefficient de la ligne L_2 en colonne C_3 est maintenant 0. La colonne a la forme souhaitée.",
+      "",
+      "==================================================",
+      "RÉSULTAT",
+      "==================================================",
+      "[ 1  0  0  |  -24   18   5 ]\n[ 0  1  0  |   20  -15  -4 ]\n[ 0  0  1  |   -5    4   1 ]",
+      "",
+      "Nous avons transformé :",
+      "",
+      "[A | I_3]",
+      "",
+      "en :",
+      "",
+      "[I_3 | A⁻¹]",
+      "",
+      "La partie droite contient donc l'inverse de A.",
+      "",
+      "A⁻¹ =",
+      "[ -24   18   5 ]\n[  20  -15  -4 ]\n[  -5    4   1 ]",
+      "",
+      "==================================================",
+      "VÉRIFICATION : A × A⁻¹",
+      "==================================================",
+      "Pour vérifier que cette matrice est bien l'inverse de A, nous multiplions A par A⁻¹.",
+      "",
+      "Élément (1, 1) :\n(1 × -24) + (2 × 20) + (3 × -5) = 1\n\nÉlément (1, 2) :\n(1 × 18) + (2 × -15) + (3 × 4) = 0\n\nÉlément (1, 3) :\n(1 × 5) + (2 × -4) + (3 × 1) = 0\n\nÉlément (2, 1) :\n(0 × -24) + (1 × 20) + (4 × -5) = 0\n\nÉlément (2, 2) :\n(0 × 18) + (1 × -15) + (4 × 4) = 1\n\nÉlément (2, 3) :\n(0 × 5) + (1 × -4) + (4 × 1) = 0\n\nÉlément (3, 1) :\n(5 × -24) + (6 × 20) + (0 × -5) = 0\n\nÉlément (3, 2) :\n(5 × 18) + (6 × -15) + (0 × 4) = 0\n\nÉlément (3, 3) :\n(5 × 5) + (6 × -4) + (0 × 1) = 1",
+      "",
+      "Le résultat doit être la matrice identité :",
+      "[ 1  0  0 ]\n[ 0  1  0 ]\n[ 0  0  1 ]",
+      "",
+      "Nous obtenons la matrice identité. Le calcul est donc correct.",
+      "",
+      "--------------------------------------------------",
+      "Pourquoi utilise-t-on la matrice identité ?",
+      "--------------------------------------------------",
+      "La matrice identité joue pour les matrices un rôle similaire au nombre 1 pour les nombres.",
+      "",
+      "5 × 1 = 5",
+      "",
+      "De la même façon :",
+      "",
+      "A × I_3 = A",
+      "",
+      "Elle sert ici de point de départ pour construire l'inverse avec la méthode de Gauss-Jordan."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029576998,
+    "date": "10/09/2026 - 08:39",
+    "timestamp": "10/09/2026 08:39:36",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 2×2",
+    "result_summary": "Non inversible (Det = 0)",
+    "matrix_a": [
+      [
+        1.0,
+        2.0
+      ],
+      [
+        2.0,
+        4.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          1.0,
+          2.0
+        ],
+        [
+          2.0,
+          4.0
+        ]
+      ]
+    },
+    "result": null,
+    "steps": [
+      "Nous allons calculer l'inverse de la matrice A à l'aide de la méthode de Gauss-Jordan.",
+      "",
+      "Une matrice inverse A⁻¹ est une matrice qui, lorsqu'elle est multipliée par A, donne la matrice identité.",
+      "Nous allons donc transformer progressivement la matrice A en matrice identité.",
+      "",
+      "Matrice A :",
+      "[ 1  2 ]\n[ 2  4 ]",
+      "",
+      "La matrice identité de taille 2×2 est :",
+      "I_2 =",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous plaçons A et I_2 côte à côte. Cela permet de suivre simultanément la transformation de A et les opérations qui permettront d'obtenir son inverse.",
+      "",
+      "[ 1  2  |  1  0 ]\n[ 2  4  |  0  1 ]",
+      "",
+      "À gauche se trouve la matrice A.",
+      "À droite se trouve la matrice identité I_2.",
+      "",
+      "Notre objectif est de transformer la partie gauche en :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Lorsque cela sera fait, la partie droite sera la matrice inverse A⁻¹.",
+      "",
+      "DÉPART",
+      "[ A | I_2 ]",
+      "↓",
+      "OBJECTIF",
+      "[ I_2 | A⁻¹ ]",
+      "",
+      "┌─────────────────────────────────────────────┐\n│ ÉTAPE 1                                     │\n│ Annuler le nombre sous le pivot (colonne 1) │\n└─────────────────────────────────────────────┘\n\nPourquoi ?\nNous voulons maintenant obtenir 0 sous le premier pivot en ligne L_2, colonne C_1.\n\nOpération :\nL_2 ← L_2 - 2L_1\n\nNous multiplions d'abord la première ligne par 2.\n\n2L_1 :\n\n[2  4 | 2  0]\n\nPuis nous soustrayons cette ligne de L_2 :\n\n[2  4 | 0  1]\n-\n[2  4 | 2  0]\n\nCalcul :\n\nPremière valeur :\n\n2 - 2 = 0\n\nDeuxième valeur :\n\n4 - 4 = 0\n\nTroisième valeur :\n\n0 - 2 = -2\n\nQuatrième valeur :\n\n1 - 0 = 1\n\nDonc :\n\nL_2 = [0  0 | -2  1]\n\nNouvelle matrice :\n\n[ 1  2  |   1  0 ]\n[ 0  0  |  -2  1 ]\n\nCe que cela signifie :\nLe premier élément de la deuxième ligne est maintenant 0. La première colonne a donc la forme souhaitée.",
+      "",
+      "Impossible de trouver un pivot non nul dans la colonne 2.",
+      "Tous les coefficients restants sous la diagonale sont nuls.",
+      "Le déterminant de la matrice est nul (det(A) = 0).",
+      "Conclusion : Cette matrice n'est pas inversible (matrice singulière)."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029475390,
+    "date": "10/09/2026 - 08:37",
+    "timestamp": "10/09/2026 08:37:55",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        3.0,
+        2.0
+      ],
+      [
+        4.0,
+        2.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          3.0,
+          2.0
+        ],
+        [
+          4.0,
+          2.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        -1.0,
+        1.0
+      ],
+      [
+        2.0,
+        -1.5
+      ]
+    ],
+    "steps": [
+      "Nous allons calculer l'inverse de la matrice A à l'aide de la méthode de Gauss-Jordan.",
+      "",
+      "Une matrice inverse A⁻¹ est une matrice qui, lorsqu'elle est multipliée par A, donne la matrice identité.",
+      "Nous allons donc transformer progressivement la matrice A en matrice identité.",
+      "",
+      "Matrice A :",
+      "[ 3  2 ]\n[ 4  2 ]",
+      "",
+      "La matrice identité de taille 2×2 est :",
+      "I_2 =",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous plaçons A et I_2 côte à côte. Cela permet de suivre simultanément la transformation de A et les opérations qui permettront d'obtenir son inverse.",
+      "",
+      "[ 3  2  |  1  0 ]\n[ 4  2  |  0  1 ]",
+      "",
+      "À gauche se trouve la matrice A.",
+      "À droite se trouve la matrice identité I_2.",
+      "",
+      "Notre objectif est de transformer la partie gauche en :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Lorsque cela sera fait, la partie droite sera la matrice inverse A⁻¹.",
+      "",
+      "DÉPART",
+      "[ A | I_2 ]",
+      "↓",
+      "OBJECTIF",
+      "[ I_2 | A⁻¹ ]",
+      "",
+      "┌────────────────────────────────────┐\n│ ÉTAPE 1                            │\n│ Simplifier la colonne 1            │\n└────────────────────────────────────┘\n\nPourquoi ?\nNous voulons obtenir un 1 dans la colonne 1 de la ligne 2.\n\nOpération :\nL_2 ← L_2 - L_1\n\nCalcul détaillé :\nPremière valeur :\n4 - 3 = 1\nDeuxième valeur :\n2 - 2 = 0\nTroisième valeur :\n0 - 1 = -1\nQuatrième valeur :\n1 - 0 = 1\nDonc :\nL_2 = [1  0 | -1  1]\n\nAvant :\n[ 3  2  |  1  0 ]\n[ 4  2  |  0  1 ]\n\nAprès :\n[ 3  2  |   1  0 ]\n[ 1  0  |  -1  1 ]\n\nCe que cela signifie :\nCette opération a permis d'obtenir un 1 dans la colonne 1 de la ligne 2.",
+      "",
+      "┌─────────────────────────────────────────┐\n│ ÉTAPE 2                                 │\n│ Placer le pivot en haut de la colonne 1 │\n└─────────────────────────────────────────┘\n\nPourquoi ?\nNous avons obtenu le 1 que nous voulons utiliser comme premier pivot. Nous allons maintenant le placer en ligne L_1.\n\nOpération :\nL_1 ↔ L_2\n\nAvant :\n[ 3  2  |   1  0 ]\n[ 1  0  |  -1  1 ]\n\nAprès :\n[ 1  0  |  -1  1 ]\n[ 3  2  |   1  0 ]\n\nCe que cela signifie :\nLe pivot 1 est maintenant placé en ligne L_1.\n\nUn pivot est le nombre que nous utilisons comme point de référence pour transformer les autres nombres de sa colonne.",
+      "",
+      "┌─────────────────────────────────────────────┐\n│ ÉTAPE 3                                     │\n│ Annuler le nombre sous le pivot (colonne 1) │\n└─────────────────────────────────────────────┘\n\nPourquoi ?\nNous voulons maintenant obtenir 0 sous le premier pivot en ligne L_2, colonne C_1.\n\nOpération :\nL_2 ← L_2 - 3L_1\n\nNous multiplions d'abord la première ligne par 3.\n\n3L_1 :\n\n[3  0 | -3  3]\n\nPuis nous soustrayons cette ligne de L_2 :\n\n[3  2 | 1  0]\n-\n[3  0 | -3  3]\n\nCalcul :\n\nPremière valeur :\n\n3 - 3 = 0\n\nDeuxième valeur :\n\n2 - 0 = 2\n\nTroisième valeur :\n\n1 - (-3) = 4\n\nQuatrième valeur :\n\n0 - 3 = -3\n\nDonc :\n\nL_2 = [0  2 | 4  -3]\n\nNouvelle matrice :\n\n[ 1  0  |  -1   1 ]\n[ 0  2  |   4  -3 ]\n\nCe que cela signifie :\nLe premier élément de la deuxième ligne est maintenant 0. La première colonne a donc la forme souhaitée.",
+      "",
+      "┌─────────────────────────────────────┐\n│ ÉTAPE 4                             │\n│ Normaliser le pivot de la ligne L_2 │\n└─────────────────────────────────────┘\n\nPourquoi ?\nLe deuxième pivot vaut actuellement 2. Pour obtenir la matrice identité, ce pivot doit être égal à 1.\n\nOpération :\nL_2 ← 1/2 L_2\n\nCalcul :\n1/2 × [0  2 | 4  -3]\n\n=\n\n[0  1 | 2  -3/2]\n\nAvant :\n[ 1  0  |  -1   1 ]\n[ 0  2  |   4  -3 ]\n\nAprès :\n[ 1  0  |  -1     1 ]\n[ 0  1  |   2  -3/2 ]\n\nCe que cela signifie :\nLe pivot en ligne L_2 est maintenant exactement égal à 1.",
+      "",
+      "==================================================",
+      "RÉSULTAT",
+      "==================================================",
+      "[ 1  0  |  -1     1 ]\n[ 0  1  |   2  -3/2 ]",
+      "",
+      "Nous avons transformé :",
+      "",
+      "[A | I_2]",
+      "",
+      "en :",
+      "",
+      "[I_2 | A⁻¹]",
+      "",
+      "La partie droite contient donc l'inverse de A.",
+      "",
+      "A⁻¹ =",
+      "[ -1     1 ]\n[  2  -3/2 ]",
+      "",
+      "==================================================",
+      "VÉRIFICATION : A × A⁻¹",
+      "==================================================",
+      "Pour vérifier que cette matrice est bien l'inverse de A, nous multiplions A par A⁻¹.",
+      "",
+      "Élément (1, 1) :\n(3 × -1) + (2 × 2) = 1\n\nÉlément (1, 2) :\n(3 × 1) + (2 × -3/2) = 0\n\nÉlément (2, 1) :\n(4 × -1) + (2 × 2) = 0\n\nÉlément (2, 2) :\n(4 × 1) + (2 × -3/2) = 1",
+      "",
+      "Le résultat doit être la matrice identité :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous obtenons la matrice identité. Le calcul est donc correct.",
+      "",
+      "--------------------------------------------------",
+      "Pourquoi utilise-t-on la matrice identité ?",
+      "--------------------------------------------------",
+      "La matrice identité joue pour les matrices un rôle similaire au nombre 1 pour les nombres.",
+      "",
+      "5 × 1 = 5",
+      "",
+      "De la même façon :",
+      "",
+      "A × I_2 = A",
+      "",
+      "Elle sert ici de point de départ pour construire l'inverse avec la méthode de Gauss-Jordan."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029472701,
+    "date": "10/09/2026 - 08:37",
+    "timestamp": "10/09/2026 08:37:52",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        3.0,
+        2.0
+      ],
+      [
+        4.0,
+        2.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          3.0,
+          2.0
+        ],
+        [
+          4.0,
+          2.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        -1.0,
+        1.0
+      ],
+      [
+        2.0,
+        -1.5
+      ]
+    ],
+    "steps": [
+      "Nous allons calculer l'inverse de la matrice A à l'aide de la méthode de Gauss-Jordan.",
+      "",
+      "Une matrice inverse A⁻¹ est une matrice qui, lorsqu'elle est multipliée par A, donne la matrice identité.",
+      "Nous allons donc transformer progressivement la matrice A en matrice identité.",
+      "",
+      "Matrice A :",
+      "[ 3  2 ]\n[ 4  2 ]",
+      "",
+      "La matrice identité de taille 2×2 est :",
+      "I_2 =",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous plaçons A et I_2 côte à côte. Cela permet de suivre simultanément la transformation de A et les opérations qui permettront d'obtenir son inverse.",
+      "",
+      "[ 3  2  |  1  0 ]\n[ 4  2  |  0  1 ]",
+      "",
+      "À gauche se trouve la matrice A.",
+      "À droite se trouve la matrice identité I_2.",
+      "",
+      "Notre objectif est de transformer la partie gauche en :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Lorsque cela sera fait, la partie droite sera la matrice inverse A⁻¹.",
+      "",
+      "DÉPART",
+      "[ A | I_2 ]",
+      "↓",
+      "OBJECTIF",
+      "[ I_2 | A⁻¹ ]",
+      "",
+      "┌────────────────────────────────────┐\n│ ÉTAPE 1                            │\n│ Simplifier la colonne 1            │\n└────────────────────────────────────┘\n\nPourquoi ?\nNous voulons obtenir un 1 dans la colonne 1 de la ligne 2.\n\nOpération :\nL_2 ← L_2 - L_1\n\nCalcul détaillé :\nPremière valeur :\n4 - 3 = 1\nDeuxième valeur :\n2 - 2 = 0\nTroisième valeur :\n0 - 1 = -1\nQuatrième valeur :\n1 - 0 = 1\nDonc :\nL_2 = [1  0 | -1  1]\n\nAvant :\n[ 3  2  |  1  0 ]\n[ 4  2  |  0  1 ]\n\nAprès :\n[ 3  2  |   1  0 ]\n[ 1  0  |  -1  1 ]\n\nCe que cela signifie :\nCette opération a permis d'obtenir un 1 dans la colonne 1 de la ligne 2.",
+      "",
+      "┌─────────────────────────────────────────┐\n│ ÉTAPE 2                                 │\n│ Placer le pivot en haut de la colonne 1 │\n└─────────────────────────────────────────┘\n\nPourquoi ?\nNous avons obtenu le 1 que nous voulons utiliser comme premier pivot. Nous allons maintenant le placer en ligne L_1.\n\nOpération :\nL_1 ↔ L_2\n\nAvant :\n[ 3  2  |   1  0 ]\n[ 1  0  |  -1  1 ]\n\nAprès :\n[ 1  0  |  -1  1 ]\n[ 3  2  |   1  0 ]\n\nCe que cela signifie :\nLe pivot 1 est maintenant placé en ligne L_1.\n\nUn pivot est le nombre que nous utilisons comme point de référence pour transformer les autres nombres de sa colonne.",
+      "",
+      "┌─────────────────────────────────────────────┐\n│ ÉTAPE 3                                     │\n│ Annuler le nombre sous le pivot (colonne 1) │\n└─────────────────────────────────────────────┘\n\nPourquoi ?\nNous voulons maintenant obtenir 0 sous le premier pivot en ligne L_2, colonne C_1.\n\nOpération :\nL_2 ← L_2 - 3L_1\n\nNous multiplions d'abord la première ligne par 3.\n\n3L_1 :\n\n[3  0 | -3  3]\n\nPuis nous soustrayons cette ligne de L_2 :\n\n[3  2 | 1  0]\n-\n[3  0 | -3  3]\n\nCalcul :\n\nPremière valeur :\n\n3 - 3 = 0\n\nDeuxième valeur :\n\n2 - 0 = 2\n\nTroisième valeur :\n\n1 - (-3) = 4\n\nQuatrième valeur :\n\n0 - 3 = -3\n\nDonc :\n\nL_2 = [0  2 | 4  -3]\n\nNouvelle matrice :\n\n[ 1  0  |  -1   1 ]\n[ 0  2  |   4  -3 ]\n\nCe que cela signifie :\nLe premier élément de la deuxième ligne est maintenant 0. La première colonne a donc la forme souhaitée.",
+      "",
+      "┌─────────────────────────────────────┐\n│ ÉTAPE 4                             │\n│ Normaliser le pivot de la ligne L_2 │\n└─────────────────────────────────────┘\n\nPourquoi ?\nLe deuxième pivot vaut actuellement 2. Pour obtenir la matrice identité, ce pivot doit être égal à 1.\n\nOpération :\nL_2 ← 1/2 L_2\n\nCalcul :\n1/2 × [0  2 | 4  -3]\n\n=\n\n[0  1 | 2  -3/2]\n\nAvant :\n[ 1  0  |  -1   1 ]\n[ 0  2  |   4  -3 ]\n\nAprès :\n[ 1  0  |  -1     1 ]\n[ 0  1  |   2  -3/2 ]\n\nCe que cela signifie :\nLe pivot en ligne L_2 est maintenant exactement égal à 1.",
+      "",
+      "==================================================",
+      "RÉSULTAT",
+      "==================================================",
+      "[ 1  0  |  -1     1 ]\n[ 0  1  |   2  -3/2 ]",
+      "",
+      "Nous avons transformé :",
+      "",
+      "[A | I_2]",
+      "",
+      "en :",
+      "",
+      "[I_2 | A⁻¹]",
+      "",
+      "La partie droite contient donc l'inverse de A.",
+      "",
+      "A⁻¹ =",
+      "[ -1     1 ]\n[  2  -3/2 ]",
+      "",
+      "==================================================",
+      "VÉRIFICATION : A × A⁻¹",
+      "==================================================",
+      "Pour vérifier que cette matrice est bien l'inverse de A, nous multiplions A par A⁻¹.",
+      "",
+      "Élément (1, 1) :\n(3 × -1) + (2 × 2) = 1\n\nÉlément (1, 2) :\n(3 × 1) + (2 × -3/2) = 0\n\nÉlément (2, 1) :\n(4 × -1) + (2 × 2) = 0\n\nÉlément (2, 2) :\n(4 × 1) + (2 × -3/2) = 1",
+      "",
+      "Le résultat doit être la matrice identité :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous obtenons la matrice identité. Le calcul est donc correct.",
+      "",
+      "--------------------------------------------------",
+      "Pourquoi utilise-t-on la matrice identité ?",
+      "--------------------------------------------------",
+      "La matrice identité joue pour les matrices un rôle similaire au nombre 1 pour les nombres.",
+      "",
+      "5 × 1 = 5",
+      "",
+      "De la même façon :",
+      "",
+      "A × I_2 = A",
+      "",
+      "Elle sert ici de point de départ pour construire l'inverse avec la méthode de Gauss-Jordan."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029469454,
+    "date": "10/09/2026 - 08:37",
+    "timestamp": "10/09/2026 08:37:49",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        3.0,
+        2.0
+      ],
+      [
+        4.0,
+        2.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          3.0,
+          2.0
+        ],
+        [
+          4.0,
+          2.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        -1.0,
+        1.0
+      ],
+      [
+        2.0,
+        -1.5
+      ]
+    ],
+    "steps": [
+      "Nous allons calculer l'inverse de la matrice A à l'aide de la méthode de Gauss-Jordan.",
+      "",
+      "Une matrice inverse A⁻¹ est une matrice qui, lorsqu'elle est multipliée par A, donne la matrice identité.",
+      "Nous allons donc transformer progressivement la matrice A en matrice identité.",
+      "",
+      "Matrice A :",
+      "[ 3  2 ]\n[ 4  2 ]",
+      "",
+      "La matrice identité de taille 2×2 est :",
+      "I_2 =",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous plaçons A et I_2 côte à côte. Cela permet de suivre simultanément la transformation de A et les opérations qui permettront d'obtenir son inverse.",
+      "",
+      "[ 3  2  |  1  0 ]\n[ 4  2  |  0  1 ]",
+      "",
+      "À gauche se trouve la matrice A.",
+      "À droite se trouve la matrice identité I_2.",
+      "",
+      "Notre objectif est de transformer la partie gauche en :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Lorsque cela sera fait, la partie droite sera la matrice inverse A⁻¹.",
+      "",
+      "DÉPART",
+      "[ A | I_2 ]",
+      "↓",
+      "OBJECTIF",
+      "[ I_2 | A⁻¹ ]",
+      "",
+      "┌────────────────────────────────────┐\n│ ÉTAPE 1                            │\n│ Simplifier la colonne 1            │\n└────────────────────────────────────┘\n\nPourquoi ?\nNous voulons obtenir un 1 dans la colonne 1 de la ligne 2.\n\nOpération :\nL_2 ← L_2 - L_1\n\nCalcul détaillé :\nPremière valeur :\n4 - 3 = 1\nDeuxième valeur :\n2 - 2 = 0\nTroisième valeur :\n0 - 1 = -1\nQuatrième valeur :\n1 - 0 = 1\nDonc :\nL_2 = [1  0 | -1  1]\n\nAvant :\n[ 3  2  |  1  0 ]\n[ 4  2  |  0  1 ]\n\nAprès :\n[ 3  2  |   1  0 ]\n[ 1  0  |  -1  1 ]\n\nCe que cela signifie :\nCette opération a permis d'obtenir un 1 dans la colonne 1 de la ligne 2.",
+      "",
+      "┌─────────────────────────────────────────┐\n│ ÉTAPE 2                                 │\n│ Placer le pivot en haut de la colonne 1 │\n└─────────────────────────────────────────┘\n\nPourquoi ?\nNous avons obtenu le 1 que nous voulons utiliser comme premier pivot. Nous allons maintenant le placer en ligne L_1.\n\nOpération :\nL_1 ↔ L_2\n\nAvant :\n[ 3  2  |   1  0 ]\n[ 1  0  |  -1  1 ]\n\nAprès :\n[ 1  0  |  -1  1 ]\n[ 3  2  |   1  0 ]\n\nCe que cela signifie :\nLe pivot 1 est maintenant placé en ligne L_1.\n\nUn pivot est le nombre que nous utilisons comme point de référence pour transformer les autres nombres de sa colonne.",
+      "",
+      "┌─────────────────────────────────────────────┐\n│ ÉTAPE 3                                     │\n│ Annuler le nombre sous le pivot (colonne 1) │\n└─────────────────────────────────────────────┘\n\nPourquoi ?\nNous voulons maintenant obtenir 0 sous le premier pivot en ligne L_2, colonne C_1.\n\nOpération :\nL_2 ← L_2 - 3L_1\n\nNous multiplions d'abord la première ligne par 3.\n\n3L_1 :\n\n[3  0 | -3  3]\n\nPuis nous soustrayons cette ligne de L_2 :\n\n[3  2 | 1  0]\n-\n[3  0 | -3  3]\n\nCalcul :\n\nPremière valeur :\n\n3 - 3 = 0\n\nDeuxième valeur :\n\n2 - 0 = 2\n\nTroisième valeur :\n\n1 - (-3) = 4\n\nQuatrième valeur :\n\n0 - 3 = -3\n\nDonc :\n\nL_2 = [0  2 | 4  -3]\n\nNouvelle matrice :\n\n[ 1  0  |  -1   1 ]\n[ 0  2  |   4  -3 ]\n\nCe que cela signifie :\nLe premier élément de la deuxième ligne est maintenant 0. La première colonne a donc la forme souhaitée.",
+      "",
+      "┌─────────────────────────────────────┐\n│ ÉTAPE 4                             │\n│ Normaliser le pivot de la ligne L_2 │\n└─────────────────────────────────────┘\n\nPourquoi ?\nLe deuxième pivot vaut actuellement 2. Pour obtenir la matrice identité, ce pivot doit être égal à 1.\n\nOpération :\nL_2 ← 1/2 L_2\n\nCalcul :\n1/2 × [0  2 | 4  -3]\n\n=\n\n[0  1 | 2  -3/2]\n\nAvant :\n[ 1  0  |  -1   1 ]\n[ 0  2  |   4  -3 ]\n\nAprès :\n[ 1  0  |  -1     1 ]\n[ 0  1  |   2  -3/2 ]\n\nCe que cela signifie :\nLe pivot en ligne L_2 est maintenant exactement égal à 1.",
+      "",
+      "==================================================",
+      "RÉSULTAT",
+      "==================================================",
+      "[ 1  0  |  -1     1 ]\n[ 0  1  |   2  -3/2 ]",
+      "",
+      "Nous avons transformé :",
+      "",
+      "[A | I_2]",
+      "",
+      "en :",
+      "",
+      "[I_2 | A⁻¹]",
+      "",
+      "La partie droite contient donc l'inverse de A.",
+      "",
+      "A⁻¹ =",
+      "[ -1     1 ]\n[  2  -3/2 ]",
+      "",
+      "==================================================",
+      "VÉRIFICATION : A × A⁻¹",
+      "==================================================",
+      "Pour vérifier que cette matrice est bien l'inverse de A, nous multiplions A par A⁻¹.",
+      "",
+      "Élément (1, 1) :\n(3 × -1) + (2 × 2) = 1\n\nÉlément (1, 2) :\n(3 × 1) + (2 × -3/2) = 0\n\nÉlément (2, 1) :\n(4 × -1) + (2 × 2) = 0\n\nÉlément (2, 2) :\n(4 × 1) + (2 × -3/2) = 1",
+      "",
+      "Le résultat doit être la matrice identité :",
+      "[ 1  0 ]\n[ 0  1 ]",
+      "",
+      "Nous obtenons la matrice identité. Le calcul est donc correct.",
+      "",
+      "--------------------------------------------------",
+      "Pourquoi utilise-t-on la matrice identité ?",
+      "--------------------------------------------------",
+      "La matrice identité joue pour les matrices un rôle similaire au nombre 1 pour les nombres.",
+      "",
+      "5 × 1 = 5",
+      "",
+      "De la même façon :",
+      "",
+      "A × I_2 = A",
+      "",
+      "Elle sert ici de point de départ pour construire l'inverse avec la méthode de Gauss-Jordan."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789029043322,
+    "date": "10/09/2026 - 08:30",
+    "timestamp": "10/09/2026 08:30:43",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "4",
+        "3"
+      ],
+      [
+        "2",
+        "2"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "4",
+          "3"
+        ],
+        [
+          "2",
+          "2"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Matrice Identité I_2 (2×2) :",
+      "• Propriété clé : A × I_2 = I_2 × A = A (élément neutre, ne modifie pas A)",
+      "",
+      "Structure par vecteurs lignes :",
+      "  L_1 = [ 1   0 ]",
+      "  L_2 = [ 0   1 ]",
+      "",
+      "Multiplication ligne par ligne (pourquoi A reste inchangée) :",
+      "  Ligne 1 résultante = (1 × L_1) + (0 × L_2) = L_1",
+      "  Ligne 2 résultante = (0 × L_1) + (1 × L_2) = L_2",
+      "",
+      "Les 3 opérations élémentaires autorisées sur les lignes :",
+      "  1. L_i ← c · L_i        (multiplier par un scalaire c ≠ 0)",
+      "  2. L_i ← L_i + c · L_j  (ajouter le multiple d'une autre ligne)",
+      "  3. L_i ↔ L_j            (échanger deux lignes)",
+      "→ La méthode de Gauss-Jordan applique ces 3 règles pour transformer A en I_2."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789024311876,
+    "date": "10/09/2026 - 07:11",
+    "timestamp": "10/09/2026 07:11:51",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "3",
+        "2"
+      ],
+      [
+        "4",
+        "2"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "3",
+          "2"
+        ],
+        [
+          "4",
+          "2"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Matrice Identité I_2 (2×2) :",
+      "• Propriété clé : A × I_2 = I_2 × A = A (élément neutre, ne modifie pas A)",
+      "",
+      "Structure par vecteurs lignes :",
+      "  L_1 = [ 1   0 ]",
+      "  L_2 = [ 0   1 ]",
+      "",
+      "Multiplication ligne par ligne (pourquoi A reste inchangée) :",
+      "  Ligne 1 résultante = (1 × L_1) + (0 × L_2) = L_1",
+      "  Ligne 2 résultante = (0 × L_1) + (1 × L_2) = L_2",
+      "",
+      "Les 3 opérations élémentaires autorisées sur les lignes :",
+      "  1. L_i ← c · L_i        (multiplier par un scalaire c ≠ 0)",
+      "  2. L_i ← L_i + c · L_j  (ajouter le multiple d'une autre ligne)",
+      "  3. L_i ↔ L_j            (échanger deux lignes)",
+      "→ La méthode de Gauss-Jordan applique ces 3 règles pour transformer A en I_2."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789023422712,
+    "date": "10/09/2026 - 06:57",
+    "timestamp": "10/09/2026 06:57:02",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "2",
+        "4"
+      ],
+      [
+        "4",
+        "7"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "2",
+          "4"
+        ],
+        [
+          "4",
+          "7"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Matrice Identité I_2 (taille 2×2) :",
+      "",
+      "1. Qu'est-ce que la Matrice Identité ?",
+      "   C'est l'équivalent du chiffre 1 pour la multiplication des matrices :",
+      "   Pour toute matrice A de même taille : A × I_2 = I_2 × A = A (la matrice ne change pas).",
+      "",
+      "2. Structure par lignes (L₁, L₂, ...) :",
+      "   Sur chaque ligne L_i, il y a un 1 sur sa propre colonne i, et 0 partout ailleurs :",
+      "   • Ligne L_1 = [ 1   0 ]  → 1 en colonne 1, 0 ailleurs",
+      "   • Ligne L_2 = [ 0   1 ]  → 1 en colonne 2, 0 ailleurs",
+      "",
+      "3. Exemple concret avec les lignes (pourquoi elle ne change rien) :",
+      "   Si on multiplie I par une matrice A composée des lignes L₁, L₂, ... :",
+      "   • Ligne 1 résultante = 1 · L_1 + 0 · L_2 = L_1",
+      "   • Ligne 2 résultante = 0 · L_1 + 1 · L_2 = L_2",
+      "",
+      "4. Lien avec les 3 opérations élémentaires autorisées sur les lignes :",
+      "   1. L_i ← c · L_i       : Multiplier une ligne par un scalaire non nul c",
+      "   2. L_i ← L_i + c · L_j : Ajouter à une ligne le multiple d'une autre ligne",
+      "   3. L_i ↔ L_j           : Échanger deux lignes",
+      "   → Dans la méthode de Gauss-Jordan, ces 3 opérations servent précisément à transformer n'importe quelle matrice pour obtenir cette Matrice Identité I_{n} !"
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789022631410,
+    "date": "10/09/2026 - 06:43",
+    "timestamp": "10/09/2026 06:43:51",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "3",
+        "2"
+      ],
+      [
+        "4",
+        "2"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "3",
+          "2"
+        ],
+        [
+          "4",
+          "2"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Matrice Identité I_2 ∈ M_2(ℝ) :",
+      "Définition : I_2 = (δ_{i,j})_{1 ≤ i, j ≤ n} où δ_{i,j} est le symbole de Kronecker :",
+      "  • L_i[j] = 1 si i = j  (diagonale principale)",
+      "  • L_i[j] = 0 si i ≠ j  (hors diagonale)",
+      "Chaque ligne L_i correspond au vecteur canonique e_i^T.",
+      "Ligne L_1 = (1, 0) :\n  • L_1[1] = 1  (i = j = 1)\n  • L_1[2] = 0  (i = 1 ≠ j = 2)",
+      "Ligne L_2 = (0, 1) :\n  • L_2[1] = 0  (i = 2 ≠ j = 1)\n  • L_2[2] = 1  (i = j = 2)",
+      "Forme matricielle finale par vecteurs lignes :\nI_2 = [\n  L_1 → [  1   0  ]\n  L_2 → [  0   1  ]\n]",
+      "Propriétés scientifiques :\n  • Trace : Tr(I_2) = 2\n  • Déterminant : det(I_2) = 1\n  • Auto-inversibilité : (I_2)⁻¹ = I_2\n  • Élément neutre : ∀ A ∈ M_2(ℝ), A · I_2 = I_2 · A = A"
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789021986102,
+    "date": "10/09/2026 - 06:33",
+    "timestamp": "10/09/2026 06:33:06",
+    "operation": "Inversion de matrice",
+    "action_type": "inverse",
+    "formula": "A⁻¹",
+    "dimensions": "Matrice 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        3.0,
+        2.0
+      ],
+      [
+        5.0,
+        4.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "A": [
+        [
+          3.0,
+          2.0
+        ],
+        [
+          5.0,
+          4.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.999999999999999,
+        -0.9999999999999996
+      ],
+      [
+        -2.4999999999999987,
+        1.4999999999999993
+      ]
+    ],
+    "steps": [
+      "Inversion d'une matrice 2×2 par la méthode de Gauss-Jordan [A | I] → [I | A⁻¹] :",
+      "Étape 1 : Construction de la matrice augmentée [A | I].",
+      "[      3       2  |       1       0 ]\n[      5       4  |       0       1 ]",
+      "",
+      "Étape 2 : Élimination de Gauss-Jordan sur la matrice augmentée [A | I_n] :",
+      "Les 3 opérations élémentaires autorisées sur les lignes appliquées :",
+      "  1. L_i ← c · L_i : Multiplier une ligne par un scalaire non nul c.",
+      "  2. L_i ← L_i + c · L_j : Ajouter à une ligne le multiple d'une autre ligne (j ≠ i).",
+      "  3. L_i ↔ L_j : Échanger deux lignes.",
+      "",
+      "Opération 1 (L_i ← c · L_i) : L1 ← 0.333333 · L1",
+      "  • Description : Multiplier la ligne L1 par le scalaire non nul c = 1 / (3) = 0.333333 pour obtenir un pivot unitaire égal à 1.",
+      "[      1  0.666667  |  0.333333       0 ]\n[      5       4  |       0       1 ]",
+      "",
+      "Opération 2 (L_i ← L_i + c · L_j) : L2 ← L2 - 5 · L1",
+      "  • Description : Ajouter à la ligne L2 le multiple (-5) · L1 pour annuler le coefficient en colonne C_1.",
+      "[      1  0.666667  |  0.333333       0 ]\n[      0  0.666667  |  -1.666667       1 ]",
+      "",
+      "Opération 1 (L_i ← c · L_i) : L2 ← 1.5 · L2",
+      "  • Description : Multiplier la ligne L2 par le scalaire non nul c = 1 / (0.666667) = 1.5 pour obtenir un pivot unitaire égal à 1.",
+      "[      1  0.666667  |  0.333333       0 ]\n[      0       1  |    -2.5     1.5 ]",
+      "",
+      "Opération 2 (L_i ← L_i + c · L_j) : L1 ← L1 - 0.666667 · L2",
+      "  • Description : Ajouter à la ligne L1 le multiple (-0.666667) · L2 pour annuler le coefficient en colonne C_2.",
+      "[      1       0  |       2      -1 ]\n[      0       1  |    -2.5     1.5 ]",
+      "",
+      "Étape 3 : La sous-matrice gauche a été réduite à la matrice Identité I_n.",
+      "La sous-matrice droite résultante est donc la matrice inverse A⁻¹."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789021622732,
+    "date": "10/09/2026 - 06:27",
+    "timestamp": "10/09/2026 06:27:02",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "3",
+        "2"
+      ],
+      [
+        "5",
+        "4"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "3",
+          "2"
+        ],
+        [
+          "5",
+          "4"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Génération scientifique pas à pas de la Matrice Identité I_2 (2×2) :",
+      "Définition par vecteurs lignes : I_2 est constituée de 2 lignes L₁, L₂, ..., L_2.",
+      "Formule scientifique : Pour tout couple d'indices (i, j) ∈ ⟦1, 2⟧² :",
+      "  • L_i[j] = 1 si i = j (position sur la diagonale principale)",
+      "  • L_i[j] = 0 si i ≠ j (position hors diagonale)",
+      "Base canonique associée : L_i = e_i^T (le i-ème vecteur unitaire standard)",
+      "--- Construction de la Ligne L_1 (1 / 2) ---",
+      "Étape 1/4 : Calcul de l'élément L_1[1]\n  • Position : Ligne L_1, Colonne C_1 → DIAGONALE PRINCIPALE (Ligne L_1, Colonne C_1 ⇒ i = j = 1)\n  • Justification : Puisque l'indice de ligne L_1 égale l'indice de colonne C_1 (i = j), la règle impose L_1[1] = 1.\n  • Valeur fixée : L_1[1] = 1\n  • État courant des lignes L₁..L_2 de I_2 :\n    L_1 : [ 1   · ]\n    L_2 : [ ·   · ]",
+      "Étape 2/4 : Calcul de l'élément L_1[2]\n  • Position : Ligne L_1, Colonne C_2 → HORS DIAGONALE (Ligne L_1, Colonne C_2 ⇒ i = 1 ≠ j = 2)\n  • Justification : Puisque l'indice de ligne L_1 diffère de l'indice de colonne C_2 (i ≠ j), la règle impose L_1[2] = 0.\n  • Valeur fixée : L_1[2] = 0\n  • État courant des lignes L₁..L_2 de I_2 :\n    L_1 : [ 1   0 ]\n    L_2 : [ ·   · ]",
+      "✓ Ligne L_1 complétée : L_1 = [ 1   0 ]",
+      "--- Construction de la Ligne L_2 (2 / 2) ---",
+      "Étape 3/4 : Calcul de l'élément L_2[1]\n  • Position : Ligne L_2, Colonne C_1 → HORS DIAGONALE (Ligne L_2, Colonne C_1 ⇒ i = 2 ≠ j = 1)\n  • Justification : Puisque l'indice de ligne L_2 diffère de l'indice de colonne C_1 (i ≠ j), la règle impose L_2[1] = 0.\n  • Valeur fixée : L_2[1] = 0\n  • État courant des lignes L₁..L_2 de I_2 :\n    L_1 : [ 1   0 ]\n    L_2 : [ 0   · ]",
+      "Étape 4/4 : Calcul de l'élément L_2[2]\n  • Position : Ligne L_2, Colonne C_2 → DIAGONALE PRINCIPALE (Ligne L_2, Colonne C_2 ⇒ i = j = 2)\n  • Justification : Puisque l'indice de ligne L_2 égale l'indice de colonne C_2 (i = j), la règle impose L_2[2] = 1.\n  • Valeur fixée : L_2[2] = 1\n  • État courant des lignes L₁..L_2 de I_2 :\n    L_1 : [ 1   0 ]\n    L_2 : [ 0   1 ]",
+      "✓ Ligne L_2 complétée : L_2 = [ 0   1 ]",
+      "--- Synthèse & Propriétés des Lignes de I_2 ---",
+      "Matrice complète par ses lignes L₁..L_2 :\n    L_1 = [ 1   0 ]\n    L_2 = [ 0   1 ]",
+      "1. Diagonale principale : L_1[1] = 1, L_2[2] = 1",
+      "2. Éléments hors diagonale : 2 élément(s) nul(s) vérifié(s)",
+      "3. Trace Tr(I_2) : 2 (somme des éléments diagonaux)",
+      "4. Déterminant Det(I_2) : 1",
+      "5. Rôle d'élément neutre : ∀ A ∈ M_n(ℝ), A × I_2 = I_2 × A = A",
+      "6. Auto-inversibilité : (I_2)⁻¹ = I_2 (la matrice identité est sa propre inverse)",
+      "Résultat final : Matrice Identité I_2 (2×2) générée avec succès."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789021022046,
+    "date": "10/09/2026 - 06:17",
+    "timestamp": "10/09/2026 06:17:02",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "3",
+        "6"
+      ],
+      [
+        "4",
+        "2"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "3",
+          "6"
+        ],
+        [
+          "4",
+          "2"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Génération pas à pas de la Matrice Identité I_2 de taille 2×2 :",
+      "Définition mathématique : Matrice carrée de 2 lignes et 2 colonnes (4 éléments à calculer).",
+      "Règle fondamentale :",
+      "  • I[i][j] = 1 si i = j (position sur la diagonale principale)",
+      "  • I[i][j] = 0 si i ≠ j (position hors diagonale)",
+      "--- Construction de la Ligne 1 / 2 ---",
+      "Étape 1/4 : Calcul de l'élément I[1][1]\n  • Position : Ligne 1, Colonne 1 → DIAGONALE PRINCIPALE (i = j = 1)\n  • Analyse : Puisque ligne 1 = colonne 1, la règle impose la valeur 1.\n  • Valeur fixée : I[1][1] = 1\n  • État de la matrice I_2 :\n    [ 1   · ]\n    [ ·   · ]",
+      "Étape 2/4 : Calcul de l'élément I[1][2]\n  • Position : Ligne 1, Colonne 2 → HORS DIAGONALE (i = 1 ≠ j = 2)\n  • Analyse : Puisque ligne 1 ≠ colonne 2, la règle impose la valeur 0.\n  • Valeur fixée : I[1][2] = 0\n  • État de la matrice I_2 :\n    [ 1   0 ]\n    [ ·   · ]",
+      "✓ Ligne 1 complétée : [ 1   0 ]",
+      "--- Construction de la Ligne 2 / 2 ---",
+      "Étape 3/4 : Calcul de l'élément I[2][1]\n  • Position : Ligne 2, Colonne 1 → HORS DIAGONALE (i = 2 ≠ j = 1)\n  • Analyse : Puisque ligne 2 ≠ colonne 1, la règle impose la valeur 0.\n  • Valeur fixée : I[2][1] = 0\n  • État de la matrice I_2 :\n    [ 1   0 ]\n    [ 0   · ]",
+      "Étape 4/4 : Calcul de l'élément I[2][2]\n  • Position : Ligne 2, Colonne 2 → DIAGONALE PRINCIPALE (i = j = 2)\n  • Analyse : Puisque ligne 2 = colonne 2, la règle impose la valeur 1.\n  • Valeur fixée : I[2][2] = 1\n  • État de la matrice I_2 :\n    [ 1   0 ]\n    [ 0   1 ]",
+      "✓ Ligne 2 complétée : [ 0   1 ]",
+      "--- Synthèse & Propriétés de la Matrice Identité I_2 ---",
+      "1. Diagonale principale : I[1][1] = 1, I[2][2] = 1",
+      "2. Éléments hors diagonale : 2 élément(s) nul(s) vérifié(s)",
+      "3. Trace Tr(I_2) : 2 (somme des éléments diagonaux)",
+      "4. Déterminant Det(I_2) : 1",
+      "5. Élément neutre : Pour toute matrice A de taille compatible, A × I = I × A = A",
+      "6. Auto-inversibilité : (I_2)⁻¹ = I_2 (la matrice identité est sa propre inverse)",
+      "Résultat final : Matrice Identité I_2 (2×2) construite avec succès."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789020776844,
+    "date": "10/09/2026 - 06:12",
+    "timestamp": "10/09/2026 06:12:56",
+    "operation": "Matrice Identité I_3",
+    "action_type": "identity",
+    "formula": "I_3",
+    "dimensions": "Dimension 3×3",
+    "result_summary": "Résultat : 3×3",
+    "matrix_a": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 3,
+      "A": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Génération pas à pas de la Matrice Identité I_3 de taille 3×3 :",
+      "Définition mathématique : Matrice carrée de 3 lignes et 3 colonnes (9 éléments à calculer).",
+      "Règle fondamentale :",
+      "  • I[i][j] = 1 si i = j (position sur la diagonale principale)",
+      "  • I[i][j] = 0 si i ≠ j (position hors diagonale)",
+      "--- Construction de la Ligne 1 / 3 ---",
+      "Étape 1/9 : Calcul de l'élément I[1][1]\n  • Position : Ligne 1, Colonne 1 → DIAGONALE PRINCIPALE (i = j = 1)\n  • Analyse : Puisque ligne 1 = colonne 1, la règle impose la valeur 1.\n  • Valeur fixée : I[1][1] = 1\n  • État de la matrice I_3 :\n    [ 1   ·   · ]\n    [ ·   ·   · ]\n    [ ·   ·   · ]",
+      "Étape 2/9 : Calcul de l'élément I[1][2]\n  • Position : Ligne 1, Colonne 2 → HORS DIAGONALE (i = 1 ≠ j = 2)\n  • Analyse : Puisque ligne 1 ≠ colonne 2, la règle impose la valeur 0.\n  • Valeur fixée : I[1][2] = 0\n  • État de la matrice I_3 :\n    [ 1   0   · ]\n    [ ·   ·   · ]\n    [ ·   ·   · ]",
+      "Étape 3/9 : Calcul de l'élément I[1][3]\n  • Position : Ligne 1, Colonne 3 → HORS DIAGONALE (i = 1 ≠ j = 3)\n  • Analyse : Puisque ligne 1 ≠ colonne 3, la règle impose la valeur 0.\n  • Valeur fixée : I[1][3] = 0\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ ·   ·   · ]\n    [ ·   ·   · ]",
+      "✓ Ligne 1 complétée : [ 1   0   0 ]",
+      "--- Construction de la Ligne 2 / 3 ---",
+      "Étape 4/9 : Calcul de l'élément I[2][1]\n  • Position : Ligne 2, Colonne 1 → HORS DIAGONALE (i = 2 ≠ j = 1)\n  • Analyse : Puisque ligne 2 ≠ colonne 1, la règle impose la valeur 0.\n  • Valeur fixée : I[2][1] = 0\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ 0   ·   · ]\n    [ ·   ·   · ]",
+      "Étape 5/9 : Calcul de l'élément I[2][2]\n  • Position : Ligne 2, Colonne 2 → DIAGONALE PRINCIPALE (i = j = 2)\n  • Analyse : Puisque ligne 2 = colonne 2, la règle impose la valeur 1.\n  • Valeur fixée : I[2][2] = 1\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ 0   1   · ]\n    [ ·   ·   · ]",
+      "Étape 6/9 : Calcul de l'élément I[2][3]\n  • Position : Ligne 2, Colonne 3 → HORS DIAGONALE (i = 2 ≠ j = 3)\n  • Analyse : Puisque ligne 2 ≠ colonne 3, la règle impose la valeur 0.\n  • Valeur fixée : I[2][3] = 0\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ 0   1   0 ]\n    [ ·   ·   · ]",
+      "✓ Ligne 2 complétée : [ 0   1   0 ]",
+      "--- Construction de la Ligne 3 / 3 ---",
+      "Étape 7/9 : Calcul de l'élément I[3][1]\n  • Position : Ligne 3, Colonne 1 → HORS DIAGONALE (i = 3 ≠ j = 1)\n  • Analyse : Puisque ligne 3 ≠ colonne 1, la règle impose la valeur 0.\n  • Valeur fixée : I[3][1] = 0\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ 0   1   0 ]\n    [ 0   ·   · ]",
+      "Étape 8/9 : Calcul de l'élément I[3][2]\n  • Position : Ligne 3, Colonne 2 → HORS DIAGONALE (i = 3 ≠ j = 2)\n  • Analyse : Puisque ligne 3 ≠ colonne 2, la règle impose la valeur 0.\n  • Valeur fixée : I[3][2] = 0\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ 0   1   0 ]\n    [ 0   0   · ]",
+      "Étape 9/9 : Calcul de l'élément I[3][3]\n  • Position : Ligne 3, Colonne 3 → DIAGONALE PRINCIPALE (i = j = 3)\n  • Analyse : Puisque ligne 3 = colonne 3, la règle impose la valeur 1.\n  • Valeur fixée : I[3][3] = 1\n  • État de la matrice I_3 :\n    [ 1   0   0 ]\n    [ 0   1   0 ]\n    [ 0   0   1 ]",
+      "✓ Ligne 3 complétée : [ 0   0   1 ]",
+      "--- Synthèse & Propriétés de la Matrice Identité I_3 ---",
+      "1. Diagonale principale : I[1][1] = 1, I[2][2] = 1, I[3][3] = 1",
+      "2. Éléments hors diagonale : 6 élément(s) nul(s) vérifié(s)",
+      "3. Trace Tr(I_3) : 3 (somme des éléments diagonaux)",
+      "4. Déterminant Det(I_3) : 1",
+      "5. Élément neutre : Pour toute matrice A de taille compatible, A × I = I × A = A",
+      "6. Auto-inversibilité : (I_3)⁻¹ = I_3 (la matrice identité est sa propre inverse)",
+      "Résultat final : Matrice Identité I_3 (3×3) construite avec succès."
+    ],
+    "solution_type": null
+  },
+  {
+    "id": 1789020405753,
+    "date": "10/09/2026 - 06:06",
+    "timestamp": "10/09/2026 06:06:45",
+    "operation": "Matrice Identité I_2",
+    "action_type": "identity",
+    "formula": "I_2",
+    "dimensions": "Dimension 2×2",
+    "result_summary": "Résultat : 2×2",
+    "matrix_a": [
+      [
+        "2",
+        "3"
+      ],
+      [
+        "4",
+        "2"
+      ]
+    ],
+    "matrix_b": null,
+    "inputs": {
+      "n": 2,
+      "A": [
+        [
+          "2",
+          "3"
+        ],
+        [
+          "4",
+          "2"
+        ]
+      ]
+    },
+    "result": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "steps": [
+      "Génération de la Matrice Identité I_2 (2×2) :",
+      "Propriété : I[i][j] = 1 sur la diagonale principale (i = j) et 0 ailleurs."
+    ],
+    "solution_type": null
+  }
+]

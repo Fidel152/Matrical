@@ -1,0 +1,6 @@
+{
+  "name": "MATRICAL",
+  "description": "Calculatrice matricielle et solveur de systèmes d'équations linéaires avec explications étape par étape.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
