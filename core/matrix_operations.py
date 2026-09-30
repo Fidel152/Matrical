@@ -159,3 +159,52 @@ def transpose(A: List[List[float]]) -> Tuple[List[List[float]], List[str]]:
         A_T.append(new_row)
         
     return A_T, steps
+
+def matrix_divide(A: List[List[float]], B: List[List[float]]) -> Tuple[List[List[float]], List[str]]:
+    """
+    Divise la matrice A par la matrice B en calculant A × B⁻¹.
+    Vérifie que B est carrée et inversible, et que les dimensions de A et B⁻¹ sont compatibles.
+    """
+    from core.inverse import inverse
+    from utils.formatter import format_matrix, format_number
+
+    rows_B, cols_B = len(B), len(B[0])
+    if rows_B != cols_B:
+        raise ValueError(
+            f"Division impossible : La matrice B ({rows_B}×{cols_B}) doit être carrée pour posséder une inverse (A ÷ B = A × B⁻¹)."
+        )
+
+    rows_A, cols_A = len(A), len(A[0])
+    if cols_A != rows_B:
+        raise ValueError(
+            f"Division impossible : Le nombre de colonnes de A ({cols_A}) doit être égal à la dimension de B ({rows_B}×{cols_B})."
+        )
+
+    B_inv, inv_steps, is_inv = inverse(B)
+    if not is_inv or B_inv is None:
+        raise ValueError(
+            "Division impossible : La matrice B n'est pas inversible (son déterminant est égal à 0)."
+        )
+
+    C, mult_steps = matrix_multiply(A, B_inv)
+
+    steps = [
+        f"Division matricielle A ({rows_A}×{cols_A}) ÷ B ({rows_B}×{cols_B}) :",
+        "Règle mathématique : Diviser par une matrice B revient à multiplier par son inverse B⁻¹ :",
+        "Formule : A ÷ B = A × B⁻¹",
+        "",
+        "==================================================",
+        "ÉTAPE 1 : Calcul de la matrice inverse B⁻¹",
+        "==================================================",
+    ]
+    steps.extend(inv_steps)
+    steps.extend([
+        "",
+        "==================================================",
+        "ÉTAPE 2 : Multiplication de A par B⁻¹ (C = A × B⁻¹)",
+        "==================================================",
+    ])
+    steps.extend(mult_steps)
+
+    return C, steps
+

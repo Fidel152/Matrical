@@ -13,7 +13,7 @@ if hasattr(sys.stderr, 'reconfigure'):
 
 import json
 import traceback
-from core.matrix_operations import matrix_add, matrix_subtract, matrix_multiply, transpose, identity_matrix
+from core.matrix_operations import matrix_add, matrix_subtract, matrix_multiply, matrix_divide, transpose, identity_matrix
 from core.determinant import determinant
 from core.inverse import inverse
 from core.gaussian import row_echelon, rref
@@ -74,6 +74,24 @@ def handle_request(payload: dict) -> dict:
             steps,
             action_type="multiply",
             formula="A × B",
+            dimensions=dim_str,
+            result_summary=res_sum
+        )
+        return {"success": True, "result": C, "steps": steps, "formatted": format_matrix(C), "history_item": item}
+
+    elif action == "divide":
+        A = parse_matrix(payload["A"])
+        B = parse_matrix(payload["B"])
+        C, steps = matrix_divide(A, B)
+        dim_str = f"Matrice {len(A)}×{len(A[0])} ÷ Matrice {len(B)}×{len(B[0])}"
+        res_sum = f"Résultat : {len(C)}×{len(C[0])}"
+        item = save_history_item(
+            "Division de matrices",
+            {"A": A, "B": B},
+            C,
+            steps,
+            action_type="divide",
+            formula="A ÷ B",
             dimensions=dim_str,
             result_summary=res_sum
         )

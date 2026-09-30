@@ -23,7 +23,7 @@ import {
   Copy
 } from 'lucide-react';
 
-type Page = 'home' | 'operations' | 'determinant' | 'inverse' | 'solver' | 'history' | 'help';
+type Page = 'home' | 'operations' | 'transpose' | 'determinant' | 'inverse' | 'solver' | 'history' | 'help';
 
 interface HistoryItem {
   id: number;
@@ -183,6 +183,19 @@ function HistoryEquationDisplay({ item, theme }: { item: HistoryItem; theme: 'da
     );
   }
 
+  // Division (A ÷ B)
+  if (operation.includes('Division') && inputs?.A && inputs?.B) {
+    return (
+      <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 py-3 px-3 rounded-xl bg-slate-950/60 border border-slate-800/80 overflow-x-auto">
+        <MatrixDisplay matrix={inputs.A} title="Matrice A" theme={theme} />
+        <span className="text-2xl font-black text-blue-400 font-mono self-center px-1">÷</span>
+        <MatrixDisplay matrix={inputs.B} title="Matrice B" theme={theme} />
+        <span className="text-2xl font-black text-emerald-400 font-mono self-center px-1">=</span>
+        <MatrixDisplay matrix={result} title="Résultat (A ÷ B)" theme={theme} />
+      </div>
+    );
+  }
+
   // Transposée (Aᵀ)
   if (operation.includes('Transposée') && inputs?.A) {
     return (
@@ -291,7 +304,7 @@ function HistoryEquationDisplay({ item, theme }: { item: HistoryItem; theme: 'da
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [opSubTab, setOpSubTab] = useState<'add' | 'subtract' | 'multiply' | 'transpose'>('add');
+  const [opSubTab, setOpSubTab] = useState<'add' | 'subtract' | 'multiply' | 'divide'>('add');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
@@ -382,6 +395,7 @@ export default function App() {
       item.operation.toLowerCase().includes('addition') ? 'add' :
       item.operation.toLowerCase().includes('soustraction') ? 'subtract' :
       item.operation.toLowerCase().includes('multiplication') ? 'multiply' :
+      item.operation.toLowerCase().includes('division') ? 'divide' :
       item.operation.toLowerCase().includes('transpos') ? 'transpose' :
       item.operation.toLowerCase().includes('déterminant') ? 'determinant' :
       item.operation.toLowerCase().includes('inverse') ? 'inverse' :
@@ -391,7 +405,7 @@ export default function App() {
     const matA = item.matrix_a || item.inputs?.A;
     const matB = item.matrix_b || item.inputs?.B;
 
-    if (action === 'add' || action === 'subtract' || action === 'multiply' || action === 'transpose') {
+    if (action === 'add' || action === 'subtract' || action === 'multiply' || action === 'divide') {
       setCurrentPage('operations');
       setOpSubTab(action as any);
       if (matA && Array.isArray(matA) && matA.length > 0) {
@@ -404,7 +418,7 @@ export default function App() {
         setColsB(matB[0].length);
         setGridB(matB.map((r: any) => r.map((c: any) => String(c))));
       }
-    } else if (action === 'determinant' || action === 'inverse') {
+    } else if (action === 'transpose' || action === 'determinant' || action === 'inverse') {
       setCurrentPage(action as Page);
       if (matA && Array.isArray(matA) && matA.length > 0) {
         setRowsA(matA.length);
@@ -682,7 +696,8 @@ export default function App() {
           <nav className="space-y-1">
             {[
               { id: 'home', label: 'Accueil', icon: Grid },
-              { id: 'operations', label: 'Opérations (+, -, ×)', icon: Calculator },
+              { id: 'operations', label: 'Opérations (+, -, ×, ÷)', icon: Calculator },
+              { id: 'transpose', label: 'Transposée (Aᵀ)', icon: RefreshCw },
               { id: 'determinant', label: 'Déterminant Det(A)', icon: Divide },
               { id: 'inverse', label: 'Matrice Inverse A⁻¹', icon: RotateCcw },
               { id: 'solver', label: 'Système d\'Équations', icon: BookOpen },
@@ -783,8 +798,8 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { title: 'Addition & Soustraction', desc: 'Additionnez ou soustrayez deux matrices de mêmes dimensions.', page: 'operations', tab: 'add' },
-                { title: 'Multiplication', desc: 'Multipliez deux matrices (colonnes A = lignes B).', page: 'operations', tab: 'multiply' },
-                { title: 'Transposée', desc: 'Intervertissez les lignes et colonnes d\'une matrice.', page: 'operations', tab: 'transpose' },
+                { title: 'Multiplication & Divisions', desc: 'Multipliez (A×B) ou divisez (A÷B = A×B⁻¹) deux matrices.', page: 'operations', tab: 'multiply' },
+                { title: 'Transposée (Aᵀ)', desc: 'Intervertissez les lignes et colonnes d\'une matrice.', page: 'transpose' },
                 { title: 'Déterminant', desc: 'Calculez le déterminant d\'une matrice carrée par élimination.', page: 'determinant' },
                 { title: 'Matrice Inverse', desc: 'Calculez A⁻¹ par la méthode de Gauss-Jordan [A|I].', page: 'inverse' },
                 { title: 'Système d\'Équations', desc: 'Résolvez AX = B et détectez le type de solution.', page: 'solver' },
@@ -824,7 +839,7 @@ export default function App() {
                 { id: 'add', label: 'Addition (A+B)' },
                 { id: 'subtract', label: 'Soustraction (A-B)' },
                 { id: 'multiply', label: 'Multiplication (A×B)' },
-                { id: 'transpose', label: 'Transposée (Aᵀ)' }
+                { id: 'divide', label: 'Divisions (A÷B)' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -888,53 +903,51 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Matrix B (Only if not transpose) */}
-              {opSubTab !== 'transpose' && (
-                <div className={`p-5 rounded-xl border ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-bold text-base text-blue-400">Matrice B</h3>
-                    <div className="flex items-center gap-2 text-xs">
-                      <label>Lignes:</label>
-                      <select
-                        value={rowsB}
-                        onChange={(e) => setRowsB(Number(e.target.value))}
-                        className={`p-1 rounded border text-xs ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
-                      >
-                        {[1, 2, 3, 4, 5].map((n) => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </select>
-                      <label>Colonnes:</label>
-                      <select
-                        value={colsB}
-                        onChange={(e) => setColsB(Number(e.target.value))}
-                        className={`p-1 rounded border text-xs ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
-                      >
-                        {[1, 2, 3, 4, 5].map((n) => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${colsB}, minmax(0, 1fr))` }}>
-                    {gridB.map((row, r) =>
-                      row.map((val, c) => (
-                        <MatrixCellInput
-                          key={`b-${r}-${c}`}
-                          value={val}
-                          onChange={(v) => handleCellChange(setGridB, r, c, v)}
-                          className={`p-2 text-center text-sm font-mono rounded border ${
-                            theme === 'dark'
-                              ? 'bg-slate-800 border-slate-700 text-white focus:border-blue-500'
-                              : 'bg-slate-50 border-slate-300 text-slate-800 focus:border-blue-500'
-                          }`}
-                        />
-                      ))
-                    )}
+              {/* Matrix B */}
+              <div className={`p-5 rounded-xl border ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-base text-blue-400">Matrice B</h3>
+                  <div className="flex items-center gap-2 text-xs">
+                    <label>Lignes:</label>
+                    <select
+                      value={rowsB}
+                      onChange={(e) => setRowsB(Number(e.target.value))}
+                      className={`p-1 rounded border text-xs ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
+                    >
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <option key={n} value={n}>{n}</option>
+                      ))}
+                    </select>
+                    <label>Colonnes:</label>
+                    <select
+                      value={colsB}
+                      onChange={(e) => setColsB(Number(e.target.value))}
+                      className={`p-1 rounded border text-xs ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
+                    >
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <option key={n} value={n}>{n}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
-              )}
+
+                <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${colsB}, minmax(0, 1fr))` }}>
+                  {gridB.map((row, r) =>
+                    row.map((val, c) => (
+                      <MatrixCellInput
+                        key={`b-${r}-${c}`}
+                        value={val}
+                        onChange={(v) => handleCellChange(setGridB, r, c, v)}
+                        className={`p-2 text-center text-sm font-mono rounded border ${
+                          theme === 'dark'
+                            ? 'bg-slate-800 border-slate-700 text-white focus:border-blue-500'
+                            : 'bg-slate-50 border-slate-300 text-slate-800 focus:border-blue-500'
+                        }`}
+                      />
+                    ))
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Submit Action */}
@@ -944,7 +957,7 @@ export default function App() {
                 if (opSubTab === 'add') executeCalculation('add', { A: gridA, B: gridB });
                 else if (opSubTab === 'subtract') executeCalculation('subtract', { A: gridA, B: gridB });
                 else if (opSubTab === 'multiply') executeCalculation('multiply', { A: gridA, B: gridB });
-                else executeCalculation('transpose', { A: gridA });
+                else executeCalculation('divide', { A: gridA, B: gridB });
               }}
               className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition-colors"
             >
@@ -967,6 +980,97 @@ export default function App() {
                 </h3>
 
                 <MatrixDisplay matrix={resultMatrix} title="Matrice Résultat" theme={theme} />
+
+                {steps.length > 0 && (
+                  <div className="space-y-2 mt-4">
+                    <h4 className="font-semibold text-sm">Étapes détaillées du calcul :</h4>
+                    <div className="p-4 rounded-lg bg-slate-950 font-mono text-xs text-slate-300 border border-slate-800 max-h-60 overflow-y-auto space-y-1">
+                      {steps.map((st: string, idx: number) => (
+                        <div key={idx} className="whitespace-pre-wrap">{st}</div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* PAGE: TRANSPOSE */}
+        {currentPage === 'transpose' && (
+          <div className="max-w-4xl mx-auto space-y-6">
+            <h2 className="text-2xl font-bold">Calcul de la Transposée (Aᵀ)</h2>
+
+            {/* Matrix A Input */}
+            <div className={`p-5 rounded-xl border ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-base text-blue-400">Matrice A</h3>
+                <div className="flex items-center gap-2 text-xs">
+                  <label>Lignes:</label>
+                  <select
+                    value={rowsA}
+                    onChange={(e) => setRowsA(Number(e.target.value))}
+                    className={`p-1 rounded border text-xs ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
+                  >
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                  <label>Colonnes:</label>
+                  <select
+                    value={colsA}
+                    onChange={(e) => setColsA(Number(e.target.value))}
+                    className={`p-1 rounded border text-xs ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
+                  >
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${colsA}, minmax(0, 1fr))` }}>
+                {gridA.map((row, r) =>
+                  row.map((val, c) => (
+                    <MatrixCellInput
+                      key={`a-${r}-${c}`}
+                      value={val}
+                      onChange={(v) => handleCellChange(setGridA, r, c, v)}
+                      className={`p-2 text-center text-sm font-mono rounded border ${
+                        theme === 'dark'
+                          ? 'bg-slate-800 border-slate-700 text-white focus:border-blue-500'
+                          : 'bg-slate-50 border-slate-300 text-slate-800 focus:border-blue-500'
+                      }`}
+                    />
+                  ))
+                )}
+              </div>
+            </div>
+
+            <button
+              disabled={loading}
+              onClick={() => executeCalculation('transpose', { A: gridA })}
+              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition-colors"
+            >
+              {loading ? 'Calcul en cours...' : 'Calculer la Transposée Aᵀ'}
+            </button>
+
+            {/* Error Display */}
+            {errorMsg && (
+              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <p className="text-sm font-medium">{errorMsg}</p>
+              </div>
+            )}
+
+            {/* Result Display */}
+            {Array.isArray(resultMatrix) && (
+              <div className={`p-6 rounded-xl border ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
+                <h3 className="text-lg font-bold text-emerald-500 mb-4 flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" /> Matrice Transposée (Aᵀ)
+                </h3>
+
+                <MatrixDisplay matrix={resultMatrix} title="Transposée Aᵀ" theme={theme} />
 
                 {steps.length > 0 && (
                   <div className="space-y-2 mt-4">
@@ -1496,7 +1600,13 @@ export default function App() {
                   {(selectedHistoryModalItem.matrix_b || selectedHistoryModalItem.inputs?.B) && (
                     <>
                       <span className="text-2xl font-black text-blue-400 font-mono">
-                        {selectedHistoryModalItem.operation.toLowerCase().includes('soustraction') ? '−' : selectedHistoryModalItem.operation.toLowerCase().includes('multiplication') ? '×' : '+'}
+                        {selectedHistoryModalItem.operation.toLowerCase().includes('soustraction')
+                          ? '−'
+                          : selectedHistoryModalItem.operation.toLowerCase().includes('multiplication')
+                          ? '×'
+                          : selectedHistoryModalItem.operation.toLowerCase().includes('division')
+                          ? '÷'
+                          : '+'}
                       </span>
                       <MatrixDisplay
                         matrix={selectedHistoryModalItem.matrix_b || selectedHistoryModalItem.inputs?.B}
